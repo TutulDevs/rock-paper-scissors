@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPS</title>
+    <style>
+        body {background: #333;color:#ccc; font-size: 1.25em; text-align: center;}
+    </style>
+</head>
+<body>
+    <h2>Rock, Paper, Scissors</h2>
+    <p>
+        This is a challenge by The Odin Project in JavaScript. Currently it can be played in browser console only.
+        After learning DOM, I'll add style to this.
+        <br> <br>
+        It has five rounds and you can input both uppercase and lowercase in the prompt.
+    </p>
+
+    <footer><a href="https://twitter.com/TutulDevs">Contact Me</a></footer>
+<script>
+
+    //  score variable
+    let playerScore = 0;
+    let computerScore = 0;
+
+    //  computer choice
+    function computerPlay() {
+        let computerChoice = Math.floor(Math.random() * 3);
+        if (computerChoice === 0) {
+            return 'rock';
+        }else if (computerChoice === 1) {
+            return 'paper';
+        }else {
+            return 'scissors';
+        }
+    };
+
+    
+
+    //  Player choice
+    function playerPlay() {
+        let choices = ['rock', 'paper', 'scissors'];
+        let playerInput = prompt('Rock, Paper or Scissors');
+        if (choices.includes(playerInput.toLowerCase())) {
+            return playerInput;
+        }else {
+            playerInput = prompt('You must enter Rock, Paper or Scissors');
+            if (choices.includes(playerInput.toLowerCase())) {
+                return playerInput;
+            }else {
+                alert('End of game');
+            }
+        }
+    };
+
+    
+
+    //  Single round
+    function playRound(playerSelection, computerSelection) {
+        let player = playerSelection.toLowerCase();
+        let computer = computerSelection.toLowerCase();
+
+        if (player === 'rock') {
+            if (computer === 'rock') {
+                console.log("It's a tie");
+            }else if (computer === 'paper') {
+                console.log("You lost");
+                computerScore++;
+            } else {
+                console.log("You win");
+                playerScore++;
+            }
+        }else if (player === 'paper') {
+            if (computer === 'paper') {
+                console.log("It's a tie");
+            }else if (computer === 'scissors') {
+                console.log("You lost");
+                computerScore++;
+            }else {
+                console.log("You win");
+                playerScore++;
+            }
+        }else {
+            if (computer === 'scissors') {
+                console.log("It's a tie");
+            }else if (computer === 'rock') {
+                console.log("You lost");
+                computerScore++;
+            }else {
+                console.log("You win");
+                playerScore++;
+            }
+        }
+    };
+
+    //  Multiple rounds
+    function game() {
+        let round = 0;
+        while(round < 5) {
+            let playerSelection = playerPlay();
+            let computerSelection = computerPlay();
+            playRound(playerSelection, computerSelection);
+            console.log(`Player Score: ${playerScore}
+Computer Score: ${computerScore}`);
+            round++;
+        }
+        if (playerScore > computerScore) {
+            console.log("You won the game");
+        }else if (playerScore < computerScore) {
+            console.log("You lost the game");
+        }else {
+            console.log("You drawn the game");
+        }
+    };
+
+    console.log('Welcome to the game');
+    game();
+
+
+</script>
+</body>
+</html>
